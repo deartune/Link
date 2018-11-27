@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.KeyEvent;
@@ -26,7 +27,7 @@ import java.util.Random;
 import static android.widget.Toast.LENGTH_SHORT;
 
 
-public class MeetupRegActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener, View.OnClickListener,View.OnKeyListener {
+public class MeetupRegActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener, View.OnClickListener, View.OnKeyListener {
 
     private DbHelper dbHelper;
     private SQLiteDatabase mdb;
@@ -90,14 +91,14 @@ public class MeetupRegActivity extends AppCompatActivity implements AdapterView.
                 if (position >= 1) {
                     seletedAge = ((TextView) view).getText().toString();
 
-                    Toast.makeText(getApplicationContext(), seletedAge + "을(를) 선택했습니다.", LENGTH_SHORT).show();
+                    //Toast.makeText(getApplicationContext(), seletedAge + "을(를) 선택했습니다.", LENGTH_SHORT).show();
                 }
                 break;
             case R.id.spinnerGender:
                 if (position >= 1) {
                     seletedGender = ((TextView) view).getText().toString();
 
-                    Toast.makeText(getApplicationContext(), seletedGender + "을(를) 선택했습니다.", LENGTH_SHORT).show();
+                    // Toast.makeText(getApplicationContext(), seletedGender + "을(를) 선택했습니다.", LENGTH_SHORT).show();
                     break;
                 }
 
@@ -112,62 +113,67 @@ public class MeetupRegActivity extends AppCompatActivity implements AdapterView.
     }
 
 
-        @Override
-        public boolean onKey(View v, int keyCode, KeyEvent event) {//Enter key Action
-            if ((event.getAction() == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)) {
-                InputMethodManager jmk = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
-                jmk.hideSoftInputFromWindow( v.getWindowToken(), 0);    //hide keyboard
-                return true;
-            }
-            return false;
-
-        }
-
-
-
-
     @Override
-    public void onClick(View v) {
-        InputMethodManager inputMethodManager=(InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
-        inputMethodManager.hideSoftInputFromWindow(v.getWindowToken(),0);
-
-        String title = editTextNameInput.getText().toString();
-
-        Random r = new Random();
-        String str = ""+((char)(r.nextInt(26)+97)); // for the first character
-        while(str.length()<5) //to add only till the length is less than 5.
-        {
-            int n = r.nextInt(10); // get new number
-            if(!str.contains(n+"")) str+=n; // add only if it does not already contain the number.
+    public boolean onKey(View v, int keyCode, KeyEvent event) {//Enter key Action
+        if ((event.getAction() == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)) {
+            InputMethodManager jmk = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
+            jmk.hideSoftInputFromWindow(v.getWindowToken(), 0);    //hide keyboard
+            return true;
         }
-
-
-        // 현재시간 변수 정의 : 현재시간을 msec 으로 구한다.
-        long now = System.currentTimeMillis();
-        // 현재시간을 date 변수에 저장한다.
-        Date date = new Date(now);
-        // 시간을 나타냇 포맷을 정한다 ( yyyy/MM/dd 같은 형태로 변형 가능 )
-        SimpleDateFormat sdfNow = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-        // nowDate 변수에 값을 저장한다.
-        String formatDate = sdfNow.format(date);
-
-
-
-        String query = "INSERT INTO MEETUP VALUES ('" + str + "','" + title +"','"+ seletedAge +"','"+ seletedGender +"','"+ formatDate+"','"+null+"')";
-        mdb.execSQL(query);
-        Toast.makeText(getApplicationContext(), "모임등록 완료", LENGTH_SHORT).show();
+        return false;
 
     }
 
 
+    @Override
+    public void onClick(View v) {
+        String title = editTextNameInput.getText().toString();
+               /*if (spinnerGender==null) {
+            Toast.makeText(getApplicationContext(), "성별을 선택해주세요", Toast.LENGTH_SHORT).show();
+        }
+
+        if(spinnerAge==null) {
+            Toast.makeText(getApplicationContext(), "연령대를 선택해주세요", Toast.LENGTH_SHORT).show();
+        }
+*/
+
+        if (title.length() == 0)
+
+        {
+            editTextNameInput.requestFocus();
+            editTextNameInput.setError("모임이름을 입력해주세요");
+        } else {
+
+            InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+            inputMethodManager.hideSoftInputFromWindow(v.getWindowToken(), 0);
 
 
+            Random r = new Random();
+            String str = "" + ((char) (r.nextInt(26) + 97)); // for the first character
+            while (str.length() < 5) //to add only till the length is less than 5.
+            {
+                int n = r.nextInt(10); // get new number
+                if (!str.contains(n + ""))
+                    str += n; // add only if it does not already contain the number.
+            }
 
 
+            // 현재시간 변수 정의 : 현재시간을 msec 으로 구한다.
+            long now = System.currentTimeMillis();
+            // 현재시간을 date 변수에 저장한다.
+            Date date = new Date(now);
+            // 시간을 나타냇 포맷을 정한다 ( yyyy/MM/dd 같은 형태로 변형 가능 )
+            SimpleDateFormat sdfNow = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+            // nowDate 변수에 값을 저장한다.
+            String formatDate = sdfNow.format(date);
 
 
+            String query = "INSERT INTO MEETUP VALUES ('" + str + "','" + title + "','" + seletedAge + "','" + seletedGender + "','" + formatDate + "','" + null + "')";
+            mdb.execSQL(query);
+            Toast.makeText(getApplicationContext(), title + "모임등록 완료", LENGTH_SHORT).show();
+        }
 
-
+    }
 
 
 }
