@@ -1,10 +1,12 @@
 package com.womenproiot.www.link;
 
+import android.app.Activity;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
@@ -24,7 +26,7 @@ import java.util.Random;
 import static android.widget.Toast.LENGTH_SHORT;
 
 
-public class MeetupRegActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener, View.OnClickListener {
+public class MeetupRegActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener, View.OnClickListener,View.OnKeyListener {
 
     private DbHelper dbHelper;
     private SQLiteDatabase mdb;
@@ -35,6 +37,7 @@ public class MeetupRegActivity extends AppCompatActivity implements AdapterView.
     Button buttonInput;
     String seletedGender;
     String seletedAge;
+    EditText editTextNameInput;
 
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +48,8 @@ public class MeetupRegActivity extends AppCompatActivity implements AdapterView.
         dbHelper = new DbHelper(this);
         mdb = dbHelper.getWritableDatabase();
 
-
+        editTextNameInput = (EditText) findViewById(R.id.editTextNameInput);
+        editTextNameInput.setOnKeyListener(this);
 
         Spinner spinner = (Spinner) findViewById(R.id.spinnerGender);///성별 spinner
         List<String> listGender = new ArrayList<String>();
@@ -76,12 +80,8 @@ public class MeetupRegActivity extends AppCompatActivity implements AdapterView.
         spinner1.setAdapter(dataAdapter1);
         spinner1.setOnItemSelectedListener(this);
 
-        View view = this.getCurrentFocus();
-        if (view != null) {
-            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
-        }
     }
+
 
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
@@ -111,9 +111,27 @@ public class MeetupRegActivity extends AppCompatActivity implements AdapterView.
     public void onNothingSelected(AdapterView<?> adapterView) {
     }
 
+
+        @Override
+        public boolean onKey(View v, int keyCode, KeyEvent event) {//Enter key Action
+            if ((event.getAction() == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)) {
+                InputMethodManager jmk = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
+                jmk.hideSoftInputFromWindow( v.getWindowToken(), 0);    //hide keyboard
+                return true;
+            }
+            return false;
+
+        }
+
+
+
+
     @Override
     public void onClick(View v) {
-        String title = ((EditText)findViewById(R.id.editTextNameInput)).getText().toString();
+        InputMethodManager inputMethodManager=(InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+        inputMethodManager.hideSoftInputFromWindow(v.getWindowToken(),0);
+
+        String title = editTextNameInput.getText().toString();
 
         Random r = new Random();
         String str = ""+((char)(r.nextInt(26)+97)); // for the first character
@@ -122,8 +140,6 @@ public class MeetupRegActivity extends AppCompatActivity implements AdapterView.
             int n = r.nextInt(10); // get new number
             if(!str.contains(n+"")) str+=n; // add only if it does not already contain the number.
         }
-
-
 
 
         // 현재시간 변수 정의 : 현재시간을 msec 으로 구한다.
@@ -139,5 +155,19 @@ public class MeetupRegActivity extends AppCompatActivity implements AdapterView.
 
         String query = "INSERT INTO MEETUP VALUES ('" + str + "','" + title +"','"+ seletedAge +"','"+ seletedGender +"','"+ formatDate+"','"+null+"')";
         mdb.execSQL(query);
+        Toast.makeText(getApplicationContext(), "모임등록 완료", LENGTH_SHORT).show();
+
     }
+
+
+
+
+
+
+
+
+
+
+
+
 }
