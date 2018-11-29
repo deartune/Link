@@ -46,6 +46,8 @@ public class MeetupRegActivity extends AppCompatActivity implements AdapterView.
     String seletedGender;
     String seletedAge;
     EditText editTextNameInput;
+    int checkRadio=0;
+    int checkSpinner=0;
 
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,6 +94,8 @@ public class MeetupRegActivity extends AppCompatActivity implements AdapterView.
     public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
         if (position >= 1) {
             seletedAge = ((TextView) view).getText().toString();
+            checkSpinner=1;
+
         }
 
     }
@@ -99,7 +103,7 @@ public class MeetupRegActivity extends AppCompatActivity implements AdapterView.
 
     @Override
     public void onNothingSelected(AdapterView<?> adapterView) {
-        Toast.makeText(getApplicationContext(), "연령대를 선택해주세요", Toast.LENGTH_SHORT).show();
+
     }
 
 
@@ -117,17 +121,23 @@ public class MeetupRegActivity extends AppCompatActivity implements AdapterView.
     RadioGroup.OnCheckedChangeListener radioGroupButtonChangeListener = new RadioGroup.OnCheckedChangeListener() {
         @Override
         public void onCheckedChanged(RadioGroup radioGroup, @IdRes int i) {
+
             if (i == R.id.womanButton) {
                 seletedGender = "여성";
+                checkRadio=1;
             } else if (i == R.id.manButton) {
                 seletedGender = "남성";
+                checkRadio=1;
             } else if (i == R.id.mixButton) {
                 seletedGender = "남녀 포함";
+                checkRadio=1;
             }
+
         }};
 
         @Override
         public void onClick(View v) {
+
             String title = editTextNameInput.getText().toString();
 
 
@@ -136,7 +146,18 @@ public class MeetupRegActivity extends AppCompatActivity implements AdapterView.
             {
                 editTextNameInput.requestFocus();
                 editTextNameInput.setError("모임이름을 입력해주세요");
-            } else {
+            }
+            else if(checkRadio==0){
+                Toast.makeText(getApplicationContext(), "모임원의 성별을 선택해주세요", Toast.LENGTH_SHORT).show();
+
+
+            }
+            else if(checkSpinner==0){
+                Toast.makeText(getApplicationContext(), "모임원의 연령대를 선택해주세요", Toast.LENGTH_SHORT).show();
+
+
+            }
+            else if(title.length()>0&&checkSpinner==1&&checkRadio==1) {
 
                 InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
                 inputMethodManager.hideSoftInputFromWindow(v.getWindowToken(), 0);
