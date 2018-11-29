@@ -41,7 +41,8 @@
         <activity android:name=".AttendeesActivity" />
         <activity android:name=".SearchPlacesActivity" />
         <activity android:name=".ResultPlacesActivity" />
-        <activity android:name=".LoadingActivity"/>
+        <activity android:name=".LoadingActivity" />
+        <activity android:name=".Item"></activity>
     </application>
 
 </manifest>
