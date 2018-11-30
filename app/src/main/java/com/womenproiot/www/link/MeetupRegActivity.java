@@ -46,16 +46,16 @@ public class MeetupRegActivity extends AppCompatActivity implements AdapterView.
     String seletedGender;
     String seletedAge;
     EditText editTextNameInput;
-    int checkRadio=0;
-    int checkSpinner=0;
+    int checkRadio = 0;
+    int checkSpinner = 0;
 
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_meetup_reg);
-        RadioButton womanButton= findViewById(R.id.womanButton);
-        RadioButton manButton= findViewById(R.id.manButton);
-        RadioButton mixButton= findViewById(R.id.mixButton);
+        RadioButton womanButton = findViewById(R.id.womanButton);
+        RadioButton manButton = findViewById(R.id.manButton);
+        RadioButton mixButton = findViewById(R.id.mixButton);
         ((Button) findViewById(R.id.buttonInput)).setOnClickListener(this);
 
         radioGroup = (RadioGroup) findViewById(R.id.radioGroup);
@@ -82,7 +82,7 @@ public class MeetupRegActivity extends AppCompatActivity implements AdapterView.
         listAge.add("60대 이상");
         listAge.add("모든 연령대 포함");
         ArrayAdapter<String> dataAdapter1 =
-                new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, listAge);
+                new ArrayAdapter<String>(this, R.layout.spinner_item, listAge);
         dataAdapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner1.setAdapter(dataAdapter1);
         spinner1.setOnItemSelectedListener(this);
@@ -94,7 +94,7 @@ public class MeetupRegActivity extends AppCompatActivity implements AdapterView.
     public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
         if (position >= 1) {
             seletedAge = ((TextView) view).getText().toString();
-            checkSpinner=1;
+            checkSpinner = 1;
 
         }
 
@@ -124,70 +124,68 @@ public class MeetupRegActivity extends AppCompatActivity implements AdapterView.
 
             if (i == R.id.womanButton) {
                 seletedGender = "여성";
-                checkRadio=1;
+                checkRadio = 1;
             } else if (i == R.id.manButton) {
                 seletedGender = "남성";
-                checkRadio=1;
+                checkRadio = 1;
             } else if (i == R.id.mixButton) {
                 seletedGender = "남녀 포함";
-                checkRadio=1;
+                checkRadio = 1;
             }
 
-        }};
+        }
+    };
 
-        @Override
-        public void onClick(View v) {
+    @Override
+    public void onClick(View v) {
 
-            String title = editTextNameInput.getText().toString();
+        String title = editTextNameInput.getText().toString();
 
 
-            if (title.length() == 0)
+        if (title.length() == 0)
 
+        {
+            editTextNameInput.requestFocus();
+            editTextNameInput.setError("모임이름을 입력해주세요");
+        } else if (checkRadio == 0) {
+            Toast.makeText(getApplicationContext(), "모임원의 성별을 선택해주세요", Toast.LENGTH_SHORT).show();
+
+
+        } else if (checkSpinner == 0) {
+            Toast.makeText(getApplicationContext(), "모임원의 연령대를 선택해주세요", Toast.LENGTH_SHORT).show();
+
+
+        } else if (title.length() > 0 && checkSpinner == 1 && checkRadio == 1) {
+
+            InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+            inputMethodManager.hideSoftInputFromWindow(v.getWindowToken(), 0);
+
+
+            Random r = new Random();
+            String str = "" + ((char) (r.nextInt(26) + 97)); // for the first character
+            while (str.length() < 5) //to add only till the length is less than 5.
             {
-                editTextNameInput.requestFocus();
-                editTextNameInput.setError("모임이름을 입력해주세요");
+                int n = r.nextInt(10); // get new number
+                if (!str.contains(n + ""))
+                    str += n; // add only if it does not already contain the number.
             }
-            else if(checkRadio==0){
-                Toast.makeText(getApplicationContext(), "모임원의 성별을 선택해주세요", Toast.LENGTH_SHORT).show();
 
 
-            }
-            else if(checkSpinner==0){
-                Toast.makeText(getApplicationContext(), "모임원의 연령대를 선택해주세요", Toast.LENGTH_SHORT).show();
+            // 현재시간 변수 정의 : 현재시간을 msec 으로 구한다.
+            long now = System.currentTimeMillis();
+            // 현재시간을 date 변수에 저장한다.
+            Date date = new Date(now);
+            // 시간을 나타냇 포맷을 정한다 ( yyyy/MM/dd 같은 형태로 변형 가능 )
+            SimpleDateFormat sdfNow = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+            // nowDate 변수에 값을 저장한다.
+            String formatDate = sdfNow.format(date);
 
 
-            }
-            else if(title.length()>0&&checkSpinner==1&&checkRadio==1) {
-
-                InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-                inputMethodManager.hideSoftInputFromWindow(v.getWindowToken(), 0);
+            String query = "INSERT INTO MEETUP VALUES ('" + str + "','" + title + "','" + seletedAge + "','" + seletedGender + "','" + formatDate + "','" + null + "')";
+            mdb.execSQL(query);
+            Toast.makeText(getApplicationContext(), title + "모임등록 완료", LENGTH_SHORT).show();
 
 
-                Random r = new Random();
-                String str = "" + ((char) (r.nextInt(26) + 97)); // for the first character
-                while (str.length() < 5) //to add only till the length is less than 5.
-                {
-                    int n = r.nextInt(10); // get new number
-                    if (!str.contains(n + ""))
-                        str += n; // add only if it does not already contain the number.
-                }
-
-
-                // 현재시간 변수 정의 : 현재시간을 msec 으로 구한다.
-                long now = System.currentTimeMillis();
-                // 현재시간을 date 변수에 저장한다.
-                Date date = new Date(now);
-                // 시간을 나타냇 포맷을 정한다 ( yyyy/MM/dd 같은 형태로 변형 가능 )
-                SimpleDateFormat sdfNow = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-                // nowDate 변수에 값을 저장한다.
-                String formatDate = sdfNow.format(date);
-
-
-                String query = "INSERT INTO MEETUP VALUES ('" + str + "','" + title + "','" + seletedAge + "','" + seletedGender + "','" + formatDate + "','" + null + "')";
-                mdb.execSQL(query);
-                Toast.makeText(getApplicationContext(), title + "모임등록 완료", LENGTH_SHORT).show();
-
-
-            }
         }
     }
+}
