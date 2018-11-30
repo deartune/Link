@@ -13,13 +13,13 @@
         android:layout_height="0dp"
         android:layout_marginTop="47dp"
         android:layout_marginBottom="21dp"
-        app:layout_constraintBottom_toTopOf="@+id/recycler_view"
+        app:layout_constraintBottom_toTopOf="@+id/recyclerView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/recycler_view"
+        android:id="@+id/recyclerView"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="8dp"
@@ -28,7 +28,6 @@
         android:layout_marginBottom="17dp"
         app:layout_constraintBottom_toTopOf="@+id/buttonNew"
         app:layout_constraintEnd_toEndOf="parent"
-        android:scrollbars="vertical"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
