@@ -92,6 +92,6 @@ public class AttendeesActivity extends AppCompatActivity implements AdapterView.
         String query ="INSERT INTO attendee (seq,name,latitude,longitude,reg_date,modi_date,fr_code,address) values ('m0172','광화문역 5호선', 37.5712497, 126.9773945, '2018/11/29 06:20:09',null,'QuQTW2cBOAUY6uUl2HEK','서울특별시 종로구 세종대로 172' )";
         //"INSERT INTO MEETUP VALUES ('" + str + "','" + title + "','" + seletedAge + "','" + seletedGender + "','" + formatDate + "','" + null + "')";
         mdb.execSQL(query);
-       // Toast.makeText(getApplicationContext(), title + "모임등록 완료", LENGTH_SHORT).seshow();
+       // Toast.makeText(getApplicationContext(), title + "모임등록 완료", LENGTH_SHORT).seshow();  //
     }
 }
