@@ -8,12 +8,12 @@
     tools:layout_editor_absoluteY="25dp">
 
     <Spinner
-        android:background="@drawable/roundspinner"
         android:id="@+id/spinner"
         android:layout_width="230dp"
-        android:layout_height="0dp"
+        android:layout_height="39dp"
         android:layout_marginTop="47dp"
         android:layout_marginBottom="21dp"
+        android:background="@drawable/roundspinner"
         app:layout_constraintBottom_toTopOf="@+id/recyclerView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -21,41 +21,37 @@
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerView"
-        android:layout_width="0dp"
+        android:layout_width="384dp"
         android:layout_height="0dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="111dp"
-        android:layout_marginEnd="8dp"
         android:layout_marginBottom="17dp"
         app:layout_constraintBottom_toTopOf="@+id/buttonNew"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintEnd_toEndOf="@+id/buttonCenter"
+        app:layout_constraintStart_toEndOf="@+id/buttonCenter"
+        app:layout_constraintTop_toBottomOf="@+id/spinner" />
 
     <ImageButton
         android:id="@+id/buttonCenter"
-        android:layout_width="190dp"
-        android:layout_height="44dp"
-        android:layout_marginEnd="0dp"
-        android:layout_marginBottom="0dp"
+        android:layout_width="0dp"
+        android:layout_height="45dp"
         android:adjustViewBounds="true"
         android:background="@android:color/transparent"
         android:scaleType="fitXY"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/buttonNew"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/buttonNew"
         app:srcCompat="@drawable/btn_start" />
 
     <ImageButton
         android:id="@+id/buttonNew"
-        android:layout_width="190dp"
-        android:layout_height="44dp"
-        android:layout_marginBottom="0dp"
+        android:layout_width="0dp"
+        android:layout_height="45dp"
         android:adjustViewBounds="true"
         android:background="@android:color/transparent"
         android:scaleType="fitXY"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/buttonCenter"
+        app:layout_constraintTop_toBottomOf="@+id/recyclerView"
         app:srcCompat="@drawable/btn_start" />
 </android.support.constraint.ConstraintLayout>

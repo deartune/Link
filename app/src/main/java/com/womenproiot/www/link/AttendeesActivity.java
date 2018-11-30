@@ -8,15 +8,19 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class AttendeesActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+public class AttendeesActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener,View.OnClickListener {
     private DbHelper dbHelper;
     private SQLiteDatabase mdb;
+    ImageButton buttonNew,buttonCenter;
     String seletedMeetUp;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +29,10 @@ public class AttendeesActivity extends AppCompatActivity implements AdapterView.
 
         dbHelper = new DbHelper(this);
         mdb = dbHelper.getWritableDatabase();
+
+        ((ImageButton) findViewById(R.id.buttonNew)).setOnClickListener(this);
+        ((ImageButton) findViewById(R.id.buttonCenter)).setOnClickListener(this);
+
 
 
         Spinner spinner = (Spinner) findViewById(R.id.spinner);
@@ -78,4 +86,12 @@ public class AttendeesActivity extends AppCompatActivity implements AdapterView.
     }
 
 
+
+    @Override
+    public void onClick(View v) {
+        String query ="INSERT INTO attendee (seq,name,latitude,longitude,reg_date,modi_date,fr_code,address) values ('m0172','광화문역 5호선', 37.5712497, 126.9773945, '2018/11/29 06:20:09',null,'QuQTW2cBOAUY6uUl2HEK','서울특별시 종로구 세종대로 172' )";
+        //"INSERT INTO MEETUP VALUES ('" + str + "','" + title + "','" + seletedAge + "','" + seletedGender + "','" + formatDate + "','" + null + "')";
+        mdb.execSQL(query);
+       // Toast.makeText(getApplicationContext(), title + "모임등록 완료", LENGTH_SHORT).seshow();
+    }
 }
