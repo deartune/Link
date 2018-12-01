@@ -147,7 +147,8 @@ public class MeetupRegActivity extends AppCompatActivity implements AdapterView.
         {
             editTextNameInput.requestFocus();
             editTextNameInput.setError("모임이름을 입력해주세요");
-        } else if (checkRadio == 0) {
+        }
+        else if (checkRadio == 0) {
             Toast.makeText(getApplicationContext(), "모임원의 성별을 선택해주세요", Toast.LENGTH_SHORT).show();
 
 

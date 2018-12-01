@@ -1,4 +1,5 @@
 package com.womenproiot.www.link;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -17,11 +18,15 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
+import static android.widget.Toast.LENGTH_SHORT;
+
 public class AttendeesActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener,View.OnClickListener {
     private DbHelper dbHelper;
     private SQLiteDatabase mdb;
     ImageButton buttonNew,buttonCenter;
     String seletedMeetUp;
+    ArrayAdapter dataAdapter1;
+    Cursor c;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,8 +46,17 @@ public class AttendeesActivity extends AppCompatActivity implements AdapterView.
         listAge.add("모임1");
         listAge.add("모임2");
 
-        ArrayAdapter<String> dataAdapter1 =
-                new ArrayAdapter<String>(this, R.layout.spinner_item, listAge);
+        String query = "SELECT title FROM meetup ";
+        c = mdb.rawQuery(query,null);
+
+        ArrayList<String> list=new ArrayList<String>();
+        while(c.moveToNext()){
+            String getTitle=c.getString(0);
+            list.add(getTitle);
+        }
+
+        dataAdapter1 =
+                new ArrayAdapter<String>(this, R.layout.spinner_item, list);
         dataAdapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(dataAdapter1);
         spinner.setOnItemSelectedListener(this);
@@ -71,11 +85,11 @@ public class AttendeesActivity extends AppCompatActivity implements AdapterView.
 
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
-        if (position >= 1) {
-            seletedMeetUp = ((TextView) view).getText().toString();
+
+            seletedMeetUp = (String)dataAdapter1.getItem(position);
 
 
-        }
+
 
     }
 
@@ -89,9 +103,10 @@ public class AttendeesActivity extends AppCompatActivity implements AdapterView.
 
     @Override
     public void onClick(View v) {
-        String query ="INSERT INTO attendee (seq,name,latitude,longitude,reg_date,modi_date,fr_code,address) values ('m0172','광화문역 5호선', 37.5712497, 126.9773945, '2018/11/29 06:20:09',null,'QuQTW2cBOAUY6uUl2HEK','서울특별시 종로구 세종대로 172' )";
+      // String query ="INSERT INTO attendee (seq,name,latitude,longitude,reg_date,modi_date,fr_code,address) values ('m0173','ㅎㅎㅎ광화문역 5호선', 37.5712497, 126.9773945, '2018/11/29 06:20:09',null,'QuQTW2cBOAUY6uUl2HEK','서울특별시 종로구 세종대로 172' )";
         //"INSERT INTO MEETUP VALUES ('" + str + "','" + title + "','" + seletedAge + "','" + seletedGender + "','" + formatDate + "','" + null + "')";
-        mdb.execSQL(query);
-       // Toast.makeText(getApplicationContext(), title + "모임등록 완료", LENGTH_SHORT).seshow();  //
+       // String query="INSERT INTO MEETUP VALUES ('m0173','목요일엔돼지모임', '20대', '남성','2018/11/29 06:20:09',null);";
+      //  mdb.execSQL(query);
+       // Toast.makeText(getApplicationContext(),"attendee777 등록 완료", LENGTH_SHORT).show();
     }
 }
