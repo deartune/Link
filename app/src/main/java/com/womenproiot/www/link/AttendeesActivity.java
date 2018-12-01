@@ -42,9 +42,7 @@ public class AttendeesActivity extends AppCompatActivity implements AdapterView.
 
         Spinner spinner = (Spinner) findViewById(R.id.spinner);
 
-        List<String> listAge = new ArrayList<String>();
-        listAge.add("모임1");
-        listAge.add("모임2");
+
 
         String query = "SELECT title FROM meetup ";
         c = mdb.rawQuery(query,null);
