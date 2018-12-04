@@ -21,7 +21,7 @@ import java.util.List;
 import static android.widget.Toast.LENGTH_SHORT;
 
 public class AttendeesActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener,View.OnClickListener {
-    private DbHelper dbHelper;
+
     private SQLiteDatabase mdb;
     ImageButton buttonNew,buttonCenter;
     String getSeq,Items;
@@ -33,8 +33,7 @@ public class AttendeesActivity extends AppCompatActivity implements AdapterView.
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_attendees);
 
-        dbHelper = new DbHelper(this);
-        mdb = dbHelper.getWritableDatabase();
+
 
         ((ImageButton) findViewById(R.id.buttonNew)).setOnClickListener(this);
         ((ImageButton) findViewById(R.id.buttonCenter)).setOnClickListener(this);
@@ -96,14 +95,8 @@ public class AttendeesActivity extends AppCompatActivity implements AdapterView.
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
 
-        String query1 = "SELECT address FROM attendee where fr_seq='"+getSeq+"'";
-        c = mdb.rawQuery(query1,null);
 
-        ArrayList<String> items=new ArrayList<String>();
-        while(c.moveToNext()){
-            String getAddress=c.getString(0);
-            items.add(getAddress);
-        }
+
 
     }
 
@@ -117,10 +110,10 @@ public class AttendeesActivity extends AppCompatActivity implements AdapterView.
 
     @Override
     public void onClick(View v) {
-     //  String query ="INSERT INTO attendee (fr_seq,name,latitude,longitude,reg_date,modi_date,fr_code,address) values ('m0179','ㅎㅎㅎ광화문역 5호선', 37.5712497, 126.9773945, '2018/11/29 06:20:09',null,'QuQTW2cBOAUY6uUl2HEK','과천시 종로구 세종대로 172' )";
+   String query ="INSERT INTO attendee (fr_seq,name,latitude,longitude,reg_date,modi_date,fr_code,address) values ('m0178','광화문역 5호선', 37.5712497, 126.9773945, '2018/11/29 06:20:09',null,'QuQTW2cBOAUY6uUl2HEK','남양주시 종로구 세종대로 172' )";
         //"INSERT INTO MEETUP VALUES ('" + str + "','" + title + "','" + seletedAge + "','" + seletedGender + "','" + formatDate + "','" + null + "')";
-      // String query="INSERT INTO MEETUP VALUES ('m0179','수요일엔독서모임', '40대', '여성','2018/11/29 06:20:09',null);";
-      //   mdb.execSQL(query);
-    //   Toast.makeText(getApplicationContext(),"완료", LENGTH_SHORT).show();
+// String query="INSERT INTO MEETUP VALUES ('m0178','목요일엔기타모임', '30대', '남성','2018/11/29 06:20:09',null);";
+    mdb.execSQL(query);
+ Toast.makeText(getApplicationContext(),"완료", LENGTH_SHORT).show();
     }
 }

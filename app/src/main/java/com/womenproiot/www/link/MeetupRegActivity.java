@@ -36,8 +36,7 @@ import static android.widget.Toast.LENGTH_SHORT;
 
 public class MeetupRegActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener, View.OnClickListener, View.OnKeyListener {
 
-    private DbHelper dbHelper;
-    private SQLiteDatabase mdb;
+
     private RadioGroup radioGroup;
 
     RadioButton womanButton, manButton, mixButton;
@@ -48,7 +47,7 @@ public class MeetupRegActivity extends AppCompatActivity implements AdapterView.
     EditText editTextNameInput;
     int checkRadio = 0;
     int checkSpinner = 0;
-
+    ArrayList<MeetUpDto> meetUpList;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,8 +61,7 @@ public class MeetupRegActivity extends AppCompatActivity implements AdapterView.
         radioGroup.setOnCheckedChangeListener(radioGroupButtonChangeListener);
 
 
-        dbHelper = new DbHelper(this);
-        mdb = dbHelper.getWritableDatabase();
+
 
 
         editTextNameInput = (EditText) findViewById(R.id.editTextNameInput);
@@ -182,8 +180,12 @@ public class MeetupRegActivity extends AppCompatActivity implements AdapterView.
             String formatDate = sdfNow.format(date);
 
 
-            String query = "INSERT INTO MEETUP VALUES ('" + str + "','" + title + "','" + seletedAge + "','" + seletedGender + "','" + formatDate + "','" + null + "')";
-            mdb.execSQL(query);
+            //meetUpList 모임등록
+            MeetUpDto newmeet = new MeetUpDto(str,title,seletedAge,seletedGender,formatDate,"");
+            meetUpList.add(newmeet);
+
+        LinkDAO.getInstance(this).insertMeetup(meetUpList);
+
             Toast.makeText(getApplicationContext(), title + "모임등록 완료", LENGTH_SHORT).show();
 
 

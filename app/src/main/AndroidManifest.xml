@@ -42,7 +42,9 @@
         <activity android:name=".SearchPlacesActivity" />
         <activity android:name=".ResultPlacesActivity" />
         <activity android:name=".LoadingActivity" />
-        <activity android:name=".Item"></activity>
+        <activity android:name=".Item" />
+        <activity android:name=".LinkDAO" />
+        <activity android:name=".AttendeeDto"></activity>
     </application>
 
 </manifest>
