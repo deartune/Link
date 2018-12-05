@@ -48,6 +48,7 @@ public class MeetupRegActivity extends AppCompatActivity implements AdapterView.
     int checkRadio = 0;
     int checkSpinner = 0;
     ArrayList<MeetUpDto> meetUpList;
+      
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -181,10 +182,13 @@ public class MeetupRegActivity extends AppCompatActivity implements AdapterView.
 
 
             //meetUpList 모임등록
-            MeetUpDto newmeet = new MeetUpDto(str,title,seletedAge,seletedGender,formatDate,"");
+             MeetUpDto newmeet = new MeetUpDto(str,title,seletedAge,seletedGender,formatDate,"");
+            meetUpList = new ArrayList<>();
             meetUpList.add(newmeet);
 
         LinkDAO.getInstance(this).insertMeetup(meetUpList);
+            
+   
 
             Toast.makeText(getApplicationContext(), title + "모임등록 완료", LENGTH_SHORT).show();
 
