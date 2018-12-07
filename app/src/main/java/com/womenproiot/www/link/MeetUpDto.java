@@ -21,4 +21,9 @@ package com.womenproiot.www.link;
             this.modi_date = modi_date;
         }
 
+        public MeetUpDto(String seq, String title) {
+            this.seq = seq;
+            this.title = title;
+        }
+
 }

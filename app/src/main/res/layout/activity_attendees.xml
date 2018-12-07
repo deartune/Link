@@ -24,6 +24,8 @@
         android:layout_width="384dp"
         android:layout_height="0dp"
         android:layout_marginBottom="17dp"
+        tools:listitem="@layout/row_recyclerview"
+        android:scrollbars="vertical"
         app:layout_constraintBottom_toTopOf="@+id/buttonNew"
         app:layout_constraintEnd_toEndOf="@+id/buttonCenter"
         app:layout_constraintStart_toEndOf="@+id/buttonCenter"

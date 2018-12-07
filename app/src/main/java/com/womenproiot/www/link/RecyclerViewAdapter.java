@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +20,13 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     private Context context;
     private List<String> items;
     private int itemLayout;
+    ArrayList<AttendeeDto> arrayList = null;
+
+    public RecyclerViewAdapter(ArrayList<AttendeeDto> list) {
+        this.arrayList = list;
+        notifyDataSetChanged();
+        Log.e("김정아","리사이클러 생성자");
+    }
 
     public RecyclerViewAdapter(Context context, List<String> items, int itemLayout) {
         this.context = context;
@@ -28,41 +36,40 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(itemLayout, parent, false);
+        Log.e("김정아","리사이클러 onCreateViewHolder");
+
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_recyclerview, parent, false);
         return new ViewHolder(v);
     }
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
-        holder.text.setText(items.get(position));
+        Log.e("김정아","리사이클러 onBindViewHolder");
 
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(context, "아이템 클릭" + position, Toast.LENGTH_SHORT).show();
-            }
-        });
+        holder.textViewName.setText(arrayList.get(position).name);
+        holder.textViewAddr.setText(arrayList.get(position).roadAddress);
+        holder.textViewFrSeq.setText(arrayList.get(position).frSeq);
 
-        holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View v) {
-                Toast.makeText(context, "아이템 롱 클릭" + position, Toast.LENGTH_SHORT).show();
-                return false;
-            }
-        });
-    }
+
+        }
+
 
     @Override
     public int getItemCount() {
-        return items.size();
+        Log.e("김정아","리사이클러 getItemCount");
+
+        return arrayList.size();
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
-        TextView text;
+        TextView textViewFrSeq,textViewName,textViewAddr;
 
-        ViewHolder(View itemView) {
+       public ViewHolder(View itemView) {
             super(itemView);
-            text = itemView.findViewById(R.id.text);
+           Log.e("김정아","리사이클러 ViewHolder 생성자");
+           textViewFrSeq = itemView.findViewById(R.id.textViewFrSeq);
+           textViewName = itemView.findViewById(R.id.textViewName);
+           textViewAddr = itemView.findViewById(R.id.textViewAddr);
         }
     }
 }

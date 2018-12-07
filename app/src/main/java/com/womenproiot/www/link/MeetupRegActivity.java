@@ -180,8 +180,9 @@ public class MeetupRegActivity extends AppCompatActivity implements AdapterView.
             String formatDate = sdfNow.format(date);
 
 
-            //meetUpList 모임등록
+           // meetUpList 모임등록
             MeetUpDto newmeet = new MeetUpDto(str,title,seletedAge,seletedGender,formatDate,"");
+            meetUpList = new ArrayList<>();
             meetUpList.add(newmeet);
 
         LinkDAO.getInstance(this).insertMeetup(meetUpList);

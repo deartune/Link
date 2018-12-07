@@ -1,9 +1,34 @@
-<TextView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@android:id/text1"
-    style="?android:attr/spinnerItemStyle"
-    android:singleLine="true"
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:ellipsize="marquee"
-    android:gravity="center"
-    android:textAlignment="inherit"/>
+    android:id="@+id/itemSpinnerLayout">
+
+    <TextView
+        android:id="@+id/textViewSeq"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="42dp"
+        android:visibility="gone"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/textViewTitle"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textViewTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="216dp"
+        android:text="Title"
+        android:gravity="center"
+        style="?android:attr/spinnerItemStyle"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textViewSeq" />
+
+</android.support.constraint.ConstraintLayout>
