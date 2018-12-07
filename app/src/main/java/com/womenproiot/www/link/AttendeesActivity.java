@@ -47,6 +47,8 @@ public class AttendeesActivity extends AppCompatActivity implements AdapterView.
 
         MySpinner adapter =
                 new MySpinner(this, R.layout.spinner_item, spinnerList);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
         mySpinner.setAdapter(adapter);
         mySpinner.setOnItemSelectedListener(this);
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////
