@@ -5,6 +5,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.support.annotation.NonNull;
+import android.widget.TextView;
 
 import com.naver.maps.map.overlay.Marker;
 
@@ -19,6 +20,8 @@ public class LinkDAO extends SQLiteOpenHelper {
     String sql;
     Cursor cursor;
 
+
+
     public static final String DB_NAME = "link.db";
     private static final SQLiteDatabase.CursorFactory FACTORY = null;
     public static final int VERSION = 11;
@@ -31,6 +34,7 @@ public class LinkDAO extends SQLiteOpenHelper {
     }
 
     public static LinkDAO getInstance(Context context) {
+
         if (instance == null) instance = new LinkDAO(context);
         mdb = instance.getWritableDatabase();
         return instance;

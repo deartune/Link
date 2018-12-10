@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,7 +21,9 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     private Context context;
     private List<String> items;
     private int itemLayout;
+    String members;
     ArrayList<AttendeeDto> arrayList = null;
+    Integer count=1;
 
     public RecyclerViewAdapter(ArrayList<AttendeeDto> list) {
         this.arrayList = list;
@@ -28,11 +31,14 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         Log.e("김정아","리사이클러 생성자");
     }
 
+
+
     public RecyclerViewAdapter(Context context, List<String> items, int itemLayout) {
         this.context = context;
         this.items = items;
         this.itemLayout = itemLayout;
     }
+
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -49,7 +55,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         holder.textViewName.setText(arrayList.get(position).name);
         holder.textViewAddr.setText(arrayList.get(position).roadAddress);
         holder.textViewFrSeq.setText(arrayList.get(position).frSeq);
-
+        holder.textViewNo.setText("회원"+String.valueOf(count));
+        count++;
 
         }
 
@@ -62,7 +69,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
-        TextView textViewFrSeq,textViewName,textViewAddr;
+        TextView textViewFrSeq,textViewName,textViewAddr,textViewNo;
+        Button deleteButton,modifyButton;
 
        public ViewHolder(View itemView) {
             super(itemView);
@@ -70,6 +78,9 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
            textViewFrSeq = itemView.findViewById(R.id.textViewFrSeq);
            textViewName = itemView.findViewById(R.id.textViewName);
            textViewAddr = itemView.findViewById(R.id.textViewAddr);
+           textViewNo=itemView.findViewById(R.id.textViewNo);
+           deleteButton=itemView.findViewById(R.id.deleteButton);
+           modifyButton=itemView.findViewById(R.id.modifyButton);
         }
     }
 }

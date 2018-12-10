@@ -31,6 +31,7 @@ public class AttendeesActivity extends AppCompatActivity implements AdapterView.
 
     ImageButton buttonNew, buttonCenter;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,88 +52,7 @@ public class AttendeesActivity extends AppCompatActivity implements AdapterView.
 
         mySpinner.setAdapter(adapter);
         mySpinner.setOnItemSelectedListener(this);
-        //////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-//        RecyclerView recyclerView = findViewById(R.id.recyclerView);
-//
-//        RecyclerViewAdapter adapter1 = new RecyclerViewAdapter(this, createItemList(),
-//                R.layout.row_recyclerview);
-//        recyclerView.setAdapter(adapter1);
-//
-//        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-//        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-//        recyclerView.setLayoutManager(layoutManager);
-//
-//        recyclerView.setItemAnimator(new DefaultItemAnimator());
     }
-
-
-//    public class MyAdapter extends ArrayAdapter<LauncherActivity.ListItem> {
-//
-//        LayoutInflater inflater;
-//        ArrayList<LauncherActivity.ListItem> objects;
-//        ViewHolder holder = null;
-//
-//        public MyAdapter(Context context, int textViewResourceId, ArrayList<LauncherActivity.ListItem> objects) {
-//            super(context, textViewResourceId, objects);
-//            inflater = ((Activity) context).getLayoutInflater();
-//            this.objects = objects;
-//        }
-//
-//        @Override
-//        public View getDropDownView(int position, View convertView, ViewGroup parent) {
-//            return getCustomView(position, convertView, parent);
-//        }
-//
-//        @Override
-//        public View getView(int position, View convertView, ViewGroup parent) {
-//            return getCustomView(position, convertView, parent);
-//        }
-//
-//        public View getCustomView(int position, View convertView, ViewGroup parent) {
-//
-//            LauncherActivity.ListItem listItem = objects.get(position);
-//            View row = convertView;
-//
-//            if (null == row) {
-//                holder = new ViewHolder();
-//                row = inflater.inflate(R.layout.row, parent, false);
-//                holder.name = (TextView) row.findViewById(R.id.name);
-//                holder.place = (TextView) row.findViewById(R.id.place);
-//                row.setTag(holder);
-//            } else {
-//                holder = (ViewHolder) row.getTag();
-//            }
-//
-//            holder.name.setText(listItem.seq);
-//            holder.place.setText(listItem.title);
-//
-//            return row;
-//        }
-//
-//        static class ViewHolder {
-//            TextView name, place;
-//
-//        }
-//    }
-
-
-//    private List<String> createItemList() {
-//
-//
-//        String query1 = "SELECT address FROM attendee where fr_seq='" + getSeq + "'";
-//        c = LinkDAO.getInstance(this).getSQLiteDatabase().rawQuery(query1, null);
-//
-//        ArrayList<String> items = new ArrayList<String>();
-//        while (c.moveToNext()) {
-//            String getAddress = c.getString(0);
-//            items.add(getAddress);
-//        }
-//
-//        return items;
-//
-//
-//    }
 
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
@@ -153,7 +73,7 @@ public class AttendeesActivity extends AppCompatActivity implements AdapterView.
         RecyclerViewAdapter adapter = new RecyclerViewAdapter(list);
         recyclerView.setAdapter(adapter);
 
-        Toast.makeText(this, seq.getText().toString(), Toast.LENGTH_SHORT).show();
+       // Toast.makeText(this, seq.getText().toString(), Toast.LENGTH_SHORT).show();
     }
 
 

@@ -8,25 +8,63 @@
     android:id="@+id/layout_item_recycler"
     android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/textViewAddr"
+    <View
+        android:id="@+id/divider3"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:layout_margin="8dp"
+        android:layout_height="1dp"
+        android:background="@color/button_Color"  />
+
+    <LinearLayout
+        android:id="@+id/coc"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
         android:background="#eeeeee"
-        android:text="item"
-        android:gravity="center"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
 
-        android:textSize="14sp"
-        android:textStyle="bold" />
+        <TextView
+            android:id="@+id/textViewNo"
+            android:layout_width="47dp"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:text="회원" />
 
-    <TextView
-        android:id="@+id/textViewName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="5dp"
-        android:visibility="gone"
-        />
+        <TextView
+            android:id="@+id/textViewName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:visibility="gone"/>
+
+        <TextView
+            android:id="@+id/textViewAddr"
+            android:layout_width="217dp"
+            android:layout_height="100dp"
+            android:layout_margin="8dp"
+            android:gravity="center"
+            android:text="item"
+
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/modifyButton"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="수정" />
+
+        <Button
+            android:id="@+id/deleteButton"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:text="삭제" />
+
+    </LinearLayout>
+
+
+
 
     <TextView
         android:id="@+id/textViewFrSeq"
@@ -34,5 +72,11 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:visibility="gone" />
+
+    <View
+        android:id="@+id/divider2"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/button_Color" />
 
 </LinearLayout>
