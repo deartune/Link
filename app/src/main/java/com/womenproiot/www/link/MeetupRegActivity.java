@@ -80,7 +80,7 @@ public class MeetupRegActivity extends AppCompatActivity implements AdapterView.
         listAge.add("60대 이상");
         listAge.add("모든 연령대 포함");
         ArrayAdapter<String> dataAdapter1 =
-                new ArrayAdapter<String>(this, R.layout.spinner_item, listAge);
+                new ArrayAdapter<String>(this, R.layout.spinner_item1, listAge);
         dataAdapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner1.setAdapter(dataAdapter1);
         spinner1.setOnItemSelectedListener(this);
