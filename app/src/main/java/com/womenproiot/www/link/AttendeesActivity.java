@@ -74,7 +74,9 @@ public class AttendeesActivity extends AppCompatActivity implements AdapterView.
         recyclerView.setAdapter(adapter);
 
        // Toast.makeText(this, seq.getText().toString(), Toast.LENGTH_SHORT).show();
+
     }
+
 
 
     @Override

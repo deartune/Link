@@ -19,12 +19,14 @@ public class LinkDAO extends SQLiteOpenHelper {
     private SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
     String sql;
     Cursor cursor;
+    String frseq;
+    String roadAddress;
 
 
 
     public static final String DB_NAME = "link.db";
     private static final SQLiteDatabase.CursorFactory FACTORY = null;
-    public static final int VERSION = 11;
+    public static final int VERSION = 16;
 
     //db를 한개만 열어서 쓰기 위해 생성자를 private로.
     //객체는 getInstance()로만 얻을 수 있음.
@@ -195,6 +197,21 @@ public class LinkDAO extends SQLiteOpenHelper {
 
         }
     }
+
+    public void deleteAttendee(String frSeq,String roadAddress) {
+        String sql = "delete from" +
+                " Attendee" +
+                " where fr_seq='"+frSeq+"'"+
+                "and address='"+
+                roadAddress+"'";
+
+        mdb.execSQL(sql);
+
+        }
+
+
+
+
 
 
 }

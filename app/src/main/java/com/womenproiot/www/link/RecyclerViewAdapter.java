@@ -48,6 +48,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         return new ViewHolder(v);
     }
 
+
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
         Log.e("김정아","리사이클러 onBindViewHolder");
@@ -55,8 +56,14 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         holder.deleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Context context = v.getContext();
-                Toast.makeText(context, position +"삭제", Toast.LENGTH_SHORT).show();
+               Context context = v.getContext();
+               LinkDAO.getInstance(v.getContext()).deleteAttendee(arrayList.get(position).frSeq,arrayList.get(position).roadAddress);
+                arrayList.remove(position);
+
+                Toast.makeText(context, "삭제완료", Toast.LENGTH_SHORT).show();
+                notifyDataSetChanged();
+                count=1;
+
             }
         });
 
