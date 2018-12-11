@@ -157,26 +157,26 @@ public class LinkDAO extends SQLiteOpenHelper {
 
 
 
-//    public void insertAttendees(String seq, ArrayList<AttendeeDto> attendees) {
-//        String sql = "INSERT INTO " +
-//                "attendee (fr_seq,name,latitude,longitude,reg_date,modi_date,fr_code,address) " +
-//                "values (?,?,?,?,?,?,?,?)";
-//
-//        for (AttendeeDto atd : attendees) {
-//
-//            mdb.execSQL(sql, new Object[]{seq
-//                    , atd.name
-//                    , String.valueOf(atd.latitude)
-//                    , String.valueOf(atd.longitude)
-//                    , format.format(new Date())
-//                    , "null"
-//                    , atd.sessionId
-//                    , atd.roadAddress
-//            });
-//        }
-//    }
+    public void insertAttendees(String seq, ArrayList<AttendeeDto> attendees) {
+        String sql = "INSERT INTO " +
+                "attendee (fr_seq,name,latitude,longitude,reg_date,modi_date,fr_code,address) " +
+                "values (?,?,?,?,?,?,?,?)";
 
-//
+        for (AttendeeDto atd : attendees) {
+
+            mdb.execSQL(sql, new Object[]{seq
+                    , atd.name
+                    , String.valueOf(atd.latitude)
+                    , String.valueOf(atd.longitude)
+                    , format.format(new Date())
+                    , "null"
+                    , atd.sessionId
+                    , atd.roadAddress
+            });
+        }
+    }
+
+
     public void insertMeetup(ArrayList<MeetUpDto> meetup) {
         String sql = "INSERT INTO" +
                 " MEETUP(seq,title,age,gender,reg_date,modi_date)" +
