@@ -1,7 +1,11 @@
 package com.womenproiot.www.link;
 
 
-    class  MeetUpDto{
+import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.widget.ImageView;
+
+class  MeetUpDto{
         public String seq;
         public String title;
         public String age;
@@ -25,5 +29,6 @@ package com.womenproiot.www.link;
             this.seq = seq;
             this.title = title;
         }
+
 
 }

@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         setContentView(R.layout.activity_main);
 
         //로딩화면 실행
-        Intent intent = new Intent(this, AttendeesActivity.class);  ////<------------------------------------테스트 위해 수정 --인텐트
+        Intent intent = new Intent(this, YourGifActivity.class);  ////<------------------------------------테스트 위해 수정 --인텐트
         startActivity(intent);
 
         //플로딩 추가버튼
