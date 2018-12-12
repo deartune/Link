@@ -26,7 +26,7 @@ public class LinkDAO extends SQLiteOpenHelper {
 
     public static final String DB_NAME = "link.db";
     private static final SQLiteDatabase.CursorFactory FACTORY = null;
-    public static final int VERSION = 16;
+    public static final int VERSION = 17;
 
     //db를 한개만 열어서 쓰기 위해 생성자를 private로.
     //객체는 getInstance()로만 얻을 수 있음.
