@@ -31,11 +31,10 @@
         <meta-data
             android:name="com.naver.maps.map.CLIENT_ID"
             android:value="@string/naver_map_sdk_client_id" />
+
+
+
         <activity android:name=".MainActivity">
-        </activity>
-
-
-        <activity android:name=".YourGifActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -47,9 +46,8 @@
         <activity android:name=".AttendeesActivity" />
         <activity android:name=".SearchPlacesActivity" />
         <activity android:name=".ResultPlacesActivity" />
-        <activity android:name=".LoadingActivity" />
-        <activity android:name=".LinkDAO" />
-        <activity android:name=".AttendeeDto"></activity>
+        <activity android:name=".YourGifActivity" />
+
 
     </application>
 

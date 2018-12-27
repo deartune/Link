@@ -19,8 +19,7 @@ public class LinkDAO extends SQLiteOpenHelper {
     private SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
     String sql;
     Cursor cursor;
-    String frseq;
-    String roadAddress;
+
 
 
 
